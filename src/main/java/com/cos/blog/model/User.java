@@ -48,5 +48,5 @@ public class User {
                                         // 도메인 	
 	@CreationTimestamp // 시간이 자동입력 된다. 테이블에 insert가 될 때 
 	private Timestamp createDate;
-
+ 
 }
