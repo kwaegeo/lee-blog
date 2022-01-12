@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="layout/header.jsp" %>
-
+<h1><%=session.getId() %></h1>
 	<div class="container">
 
 		<div class="card m-2">
