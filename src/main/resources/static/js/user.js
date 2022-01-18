@@ -5,6 +5,11 @@ let index = {
 			this.save();
 		});
 	
+		$("#btn-update").on("click", ()=>{ // function(){}, () => {} 이렇게 하는 이유는
+			// this를 바인딩 하기 위해서 사용함.
+			this.update();
+		});
+		
 //		$("#btn-login").on("click", ()=>{ // function(){}, () => {} 이렇게 하는 이유는
 //			// this를 바인딩 하기 위해서 사용함.
 //			this.login();
@@ -38,6 +43,32 @@ let index = {
 			location.href="/";
 		}).fail(function(error){
 		 // 실패면 FAIL의 함수실행
+			alert(JSON.stringify(error));
+		});
+		
+	},
+	
+	update: function(){
+
+		let data = {
+			id: $("#id").val(),
+			username: $("#username").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
+		};
+		
+		$.ajax({
+			type: "PUT",
+			url:"/user",
+			data: JSON.stringify(data), 
+			contentType: "application/json; charset=utf-8", 
+			dataType: "json"
+		}).done(function(resp){
+
+			alert("회원수정이 완료되었습니다.");
+			location.href="/";
+		}).fail(function(error){
+	
 			alert(JSON.stringify(error));
 		});
 		

@@ -34,7 +34,7 @@ public class User {
 	@Column(nullable = false, length = 30, unique=true) // 컬럼의 조건을 정하는 것
 	private String username; //아이디
 	
-	@Column(nullable = false, length = 100) //123456 => 해쉬로 변경 (비밀번호 암호화)
+	@Column(length = 100) //123456 => 해쉬로 변경 (비밀번호 암호화)
 	private String password; //비번
 
 	@Column(nullable = false, length = 50)

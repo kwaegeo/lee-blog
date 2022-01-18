@@ -25,6 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private PrincipalDetailService principalDetailService;
 	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
 	@Bean //IoC가 된다.  
 	public BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder(); // 이 객체를 통해서 비밀번호를 암호화한다(해쉬변경).
