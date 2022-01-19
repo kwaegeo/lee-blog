@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 	private int id; //시퀀스, auto-increment로 증가 시킬 것
 	
-	@Column(nullable = false, length = 30, unique=true) // 컬럼의 조건을 정하는 것
+	@Column(nullable = false, length = 100, unique=true) // 컬럼의 조건을 정하는 것
 	private String username; //아이디
 	
 	@Column(length = 100) //123456 => 해쉬로 변경 (비밀번호 암호화)
@@ -46,6 +46,9 @@ public class User {
 	private RoleType role; //Enum을 쓰는게 좋다. 회원의 권한을 지칭하는 필드인데 
 	                                     // Type을 Enum으로 사용하면 이 값을 admin, user, manager이 3가지로 정할 수 있음. 
                                         // 도메인 	
+	
+	private String oauth;
+	
 	@CreationTimestamp // 시간이 자동입력 된다. 테이블에 insert가 될 때 
 	private Timestamp createDate;
  
