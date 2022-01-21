@@ -10,18 +10,38 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
 import com.cos.blog.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 	
-	@Autowired //의존 주입
-	private BoardRepository boardRepository;
+	private final BoardRepository boardRepository;
+	private final ReplyRepository replyRepository;
+	
+//	@Autowired //의존 주입
+//	private BoardRepository boardRepository;
+// Autowired 의존주입 방식
+//	@Autowired
+//	private ReplyRepository replyRepository;
+	
 
+//	public BoardService(BoardRepository bRepo, ReplyRepository rRepo) {
+//		this.boardRepository = bRepo;
+//		this.replyRepository = rRepo;
+//		//생성자 의존 주입 방식
+//	}
+
+	
 	@Transactional
 	public void 글쓰기(Board board, User user) { //title, content
 		board.setCount(0);
@@ -60,4 +80,12 @@ public class BoardService {
 		//해당 함수로 종료시에 트랜잭션이 Service가 종료될 때) 트랜잭션이 종료된다. 이 때 더티체킹이 일어나며 - DB쪽으로 자동 업데이트 된다. (DB flush)		
 	}
 
+	@Transactional
+	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+			int result = replyRepository.LeeSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+			
+			System.out.println(result); //오브젝트를 출력하게 되면 자동으로 toString이 호출한다.
+	}
+	
+	
 }
